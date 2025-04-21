@@ -1,0 +1,50 @@
+<form [formGroup]="userForm" (ngSubmit)="mysubmit()">
+    <div id="input name">
+        <input type="text" placeholder="your name" name="" formControlName="name" id=""><br><br>
+        <span id="name err" style="color: red;" *ngIf="userForm?.get('name')?.invalid && isSubmitted">
+             <small *ngIf="userForm?.get('name')?.errors?.['required']">Name is a required field</small> <br>
+             <small *ngIf="userForm?.get('name')?.errors?.['minlength']"></small>
+        </span>
+   <br>
+    </div>
+    <div id="input age">
+        <input type="number" name="" formControlName="age" id="" placeholder="your age"><br><br>
+         <span id="age err" style="color: red;" *ngIf="userForm?.get('age')?.invalid && isSubmitted">
+          <small *ngIf="userForm?.get('age')?.errors?.['required']">Age is a required field</small>
+          <small *ngIf="userForm?.get('age')?.errors?.['errmsg']">{{userForm.get('age')?.errors?.['errmsg']}}</small>
+         </span>
+    </div>
+   <div formGroupName="address">
+    <div>
+        <input type="text" name="" formControlName="streetname" id=""><br>
+        <span id="" *ngIf="userForm?.get('address')?.get('streetname')?.invalid && isSubmitted" style="color: red;">
+          streetname should be mentioned
+        </span>
+    </div>
+    <input type="number" name="" formControlName="zipcode" id="">
+
+   </div><br>
+   <div class="password">
+    <input type="text" name="" id="" formControlName="password"><br>
+    <span *ngIf="userForm?.get('password')?.invalid && isSubmitted">
+      password is a required field
+    </span><br>
+    <input type="text" name="" id="" formControlName="confrmpass"><br>
+    <span *ngIf="userForm?.get('confrmpass')?.dirty && userForm.errors?.['matcherr'] && isSubmitted">
+      {{userForm.errors?.['matcherr']}}
+    </span>
+   </div>
+   <div>
+    <select name="" id="" formControlName="drpdown">
+      <option *ngFor="let q of quad;let i=index" [value]="q">
+        {{q}}
+      </option>
+    </select>
+   </div>
+   <div>
+    <label for="">M</label>&nbsp;<input type="radio" name="radiobtn" id="" value="M" formControlName="radiobtn">
+    <label for="">F</label>&nbsp;<input type="radio" name="radiobtn" id="" value="F" formControlName="radiobtn">
+    <label for="">Others</label>&nbsp;<input type="radio" name="radiobtn" id="" value="O" formControlName="radiobtn">
+   </div>
+    <button type="submit" >Save</button>
+  </form>
